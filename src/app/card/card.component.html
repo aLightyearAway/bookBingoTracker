@@ -1,0 +1,13 @@
+<div 
+  class="card text-white mb-3" 
+  [ngClass]="{'bg-success': board['card'+card.id].done, 'bg-primary': !board['card'+card.id].done}"
+  (click)="openModal(card)" 
+  style="max-width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{card.title}}</h5>
+    <div class="bookInfo" *ngIf="board['card'+card.id].bookTitle">
+      <p class="bookTitle">{{board['card'+card.id].bookTitle}}</p>
+      <p class="bookAuthor">{{board['card'+card.id].bookAuthor}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+
+.row{
+  min-width: 1250px;
+}
+@media only screen and (max-width: 767px) {
+  .row{
+    min-width: 250px;
+  }
+  .col-md-2{
+    width: 100vw;
+  }
+}

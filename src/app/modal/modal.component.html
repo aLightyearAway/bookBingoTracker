@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{card.title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <b>Description: </b>{{card.description}}
+  <br><br>
+  
+  <div class="row">
+    <div class="col-md-8">
+      <h5>Book read:</h5>
+      <div *ngIf="board['card'+card.id].bookTitle" class="displayBook">
+        <p><b>Title: </b>{{bookTitle}}</p>
+        <p><b>Series: </b>{{bookSeries}}</p>
+        <p><b>Author: </b>{{bookAuthor}}</p>
+        <button type="button" class="btn btn-danger mt-4" *ngIf="!edit" (click)="removeBook(card.id)">Remove book</button>
+        <button type="button" class="btn btn-secondary ml-4 mt-4" *ngIf="!edit" (click)="editBook(card.id)">Edit book</button>
+      </div>
+      <form *ngIf="!board['card'+card.id].bookTitle">
+        <div class="form-group">
+          <input type="text" class="form-control" id="book-title" placeholder="Title">
+          <input type="text" class="form-control" id="book-series" placeholder="Series (if book is part of a series)">
+          <input type="text" class="form-control" id="book-author" placeholder="Author">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="registerBook(card.id)">Add book</button>
+      </form>
+      <form *ngIf="edit">
+        <div class="form-group">
+          <input type="text" class="form-control" id="book-title" value="{{bookTitle}}">
+          <input type="text" class="form-control" id="book-series" value="{{bookSeries}}">
+          <input type="text" class="form-control" id="book-author" value="{{bookAuthor}}">
+        </div>
+        <button type="button" class="btn btn-secondary mr-4" (click)="edit = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="registerBook(card.id)">Confirm</button>
+      </form>
+    </div>
+    <div class="col-md-4" *ngIf="board['card'+card.id].bookTitle">
+      <h5>Done:</h5>
+      <label class="switch">
+        <input type="checkbox" [checked]="done" (click)="setDone(card.id)">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+</div>
